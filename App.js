@@ -9,6 +9,7 @@ import TrackCreateScreen from './src/screens/TrackCreateScreen'
 import TrackDetailScreen from './src/screens/TrackDetailScreen'
 import TrackListScreen from './src/screens/TrackListScreen'
 import { Provider as AuthProvider } from './src/context/AuthContext'
+import { setNavigator } from './src/navigationRef'
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
@@ -36,8 +37,9 @@ const App = createAppContainer(switchNavigator)
 export default () => {
   return (
     <AuthProvider>
-      <App />
+      <App ref={(navigator) => setNavigator(navigator)}/>
     </AuthProvider>  
   )
 }
 //this creates the hierarchical structure of the providers in our app
+//the ref prop allows our components to gain access to the navigation in our components
