@@ -8,6 +8,7 @@ import SignupScreen from './src/screens/SignupScreen'
 import TrackCreateScreen from './src/screens/TrackCreateScreen'
 import TrackDetailScreen from './src/screens/TrackDetailScreen'
 import TrackListScreen from './src/screens/TrackListScreen'
+import { Provider as AuthProvider } from './src/context/AuthContext'
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
@@ -23,10 +24,20 @@ const switchNavigator = createSwitchNavigator({
     //this helps us go back and forth between tracklist and track detail
     TrackCreate: TrackCreateScreen, 
     Account: AccountScreen,
-  })
+  }),
   //this creates the bottom tab navigation where we can freely move among the navigation tabs
+  
 })
 //this will switch between authentication flow and non-authentication flow(signup/signin vs everything else)
 //SEE DIAGRAM FILE
 
-export default createAppContainer(switchNavigator)
+const App = createAppContainer(switchNavigator)
+
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>  
+  )
+}
+//this creates the hierarchical structure of the providers in our app
