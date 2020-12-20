@@ -2,7 +2,7 @@ import { NavigationActions } from 'react-navigation'
 
 let navigator
 
-export const setNavigator = (nav) => {
+export const setNavigator = nav => {
     navigator = nav
 }
 //this function is essential to gaining access to our navigator inside the app
