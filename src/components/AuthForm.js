@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Text, Button, Input } from 'react-native-elements'
 import Spacer from './Spacer'
 
@@ -36,8 +36,13 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText}) => {
         </>
     )
 }
+//spacer is the helper component for styling. As long as it is imported we can use it anywhere
+//important to note that (newEmail) => setEmail(newEmail) can simply be converted to setEmail. This is a best practice for form inputs
 
 const styles = StyleSheet.create({
+    header: {
+        textAlign: 'center'
+    },
     errorMessage: {
         fontSize: 16,
         fontWeight: 'bold', 
