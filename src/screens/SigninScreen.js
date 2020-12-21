@@ -3,12 +3,14 @@ import { View, StyleSheet } from 'react-native'
 import AuthForm from '../components/AuthForm'
 import NavLink from '../components/NavLink'
 import { Context } from '../context/AuthContext'
+import { NavigationEvents } from 'react-navigation'
 
 const SigninScreen = () => {
-    const { state, signin } = useContext(Context)
+    const { state, signin, clearErrorMessage } = useContext(Context)
 
     return (
         <View style={styles.container}>
+            <NavigationEvents onWillFocus={clearErrorMessage}/>
             <AuthForm
                 headerText='Sign In to Your Account'
                 errorMessage={state.errorMessage}
@@ -22,6 +24,7 @@ const SigninScreen = () => {
         </View>
     )
 }
+//onwillfocus is a prop function that runs right before we navigate to another screen (there are several other prop functions with NavigationEvents that also work). It needs to be on both navigable components to work
 
 SigninScreen.navigationOptions = () => {
     return {

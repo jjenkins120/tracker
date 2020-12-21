@@ -11,10 +11,23 @@ const authReducer = (state, action) => {
             return { token: action.payload, errorMessage: ''}
         case 'clear_error_message':
             return {...state, errorMessage:''} 
+        case 'signout':
+            return {token: null, errorMessage: ''}
         default: 
             return state
     }
 }
+
+const tryLocalSignin = dispatch => async () => {
+    const token = await AsyncStorage.getItem('token')
+    if (token){
+        dispatch({ type: 'signin', payload: token })
+        navigate('TrackList')
+    } else {
+        navigate('Signup')
+    }
+}
+//this function will check to see if the user has a token when revisiting the page -this way, if they've signed in they don't need to re-sign in
 
 const clearErrorMessage = dispatch => () => {
     dispatch({ type: 'clear_error_message' })
@@ -66,15 +79,17 @@ const signin = dispatch => async ({ email, password }) => {
 }
 //similar to signup above
 
-const signout = dispatch => {
-    return () => {
-        
-    }
+const signout = dispatch => async () => {
+    await AsyncStorage.removeItem('token')
+    dispatch({ type: 'signout'})
+    navigate('loginFlow')
 }
+//this allows us to get rid of the token, which essentially forces the user back to the signin screen and effectively signing them out
+
 
 export const { Provider, Context } = createDataContext(
     authReducer, 
-    { signin, signout, signup, clearErrorMessage },
+    { signin, signout, signup, clearErrorMessage, tryLocalSignin },
     { token: null, errorMessage:''}
 )
 //reducer = authReducer

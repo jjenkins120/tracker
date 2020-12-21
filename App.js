@@ -10,8 +10,11 @@ import TrackDetailScreen from './src/screens/TrackDetailScreen'
 import TrackListScreen from './src/screens/TrackListScreen'
 import { Provider as AuthProvider } from './src/context/AuthContext'
 import { setNavigator } from './src/navigationRef'
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
+  //because resolveauth is listed at the top, it will run as the default route unless an initial default is specified
   loginFlow: createStackNavigator({
     Signup: SignupScreen, 
     Signin: SigninScreen
@@ -27,7 +30,6 @@ const switchNavigator = createSwitchNavigator({
     Account: AccountScreen,
   }),
   //this creates the bottom tab navigation where we can freely move among the navigation tabs
-  
 })
 //this will switch between authentication flow and non-authentication flow(signup/signin vs everything else)
 //SEE DIAGRAM FILE
