@@ -13,7 +13,7 @@ const Map = () => {
 
     return (
         <MapView 
-            provider={PROVIDER_GOOGLE}
+            // provider={PROVIDER_GOOGLE}
             style={styles.map}
             initialRegion={{
                 ...currentLocation.coords,
@@ -22,17 +22,17 @@ const Map = () => {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01
             }}
-            // region={{
-            //     ...currentLocation.coords,
-            //     latitudeDelta: 0.01,
-            //     longitudeDelta: 0.01
-            // }}
+            region={{
+                ...currentLocation.coords,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01
+            }}
             //the region property allows for the map to recenter when the location information changes
             //region updating can cause the map to constantly recenter, which can be annoying for the user, so it might be better where the user is moving using a circle prop
         >
             <Circle
                 center={currentLocation.coords}
-                radius={30}
+                radius={20}
                 strokeColor='rgba(158, 158, 255, 1.0)'
                 fillColor='rgba(158, 158, 255, 0.3)'
             />

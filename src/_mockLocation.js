@@ -24,5 +24,8 @@ setInterval(()=> {
     })
     counter++
 }, 1000)
+//A BUG HERE IS THAT ON LOAD, THE LOCATION DATA DEFAULTS TO DWNTWN SAN FRANCISCO
+
+
 
 //this provides fake location data to use for our app
