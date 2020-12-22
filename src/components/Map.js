@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ActivityIndicator, StyleSheet } from 'react-native'
-import MapView, { PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE, Polyline, Circle } from 'react-native-maps'
 import { Context as LocationContext } from '../context/LocationContext'
 
 const Map = () => {
@@ -22,13 +22,22 @@ const Map = () => {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01
             }}
-            region={{
-                ...currentLocation.coords,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01
-            }}
+            // region={{
+            //     ...currentLocation.coords,
+            //     latitudeDelta: 0.01,
+            //     longitudeDelta: 0.01
+            // }}
             //the region property allows for the map to recenter when the location information changes
-        />
+            //region updating can cause the map to constantly recenter, which can be annoying for the user, so it might be better where the user is moving using a circle prop
+        >
+            <Circle
+                center={currentLocation.coords}
+                radius={30}
+                strokeColor='rgba(158, 158, 255, 1.0)'
+                fillColor='rgba(158, 158, 255, 0.3)'
+            />
+            {/* this draws a center around our current location - good for UI. Has to have specified radius and bordercolor(strokeColor) and fillcolor that is an RGBA value */}
+        </MapView>
     )
 }
 
