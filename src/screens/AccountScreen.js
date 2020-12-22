@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import { Button } from 'react-native-elements'
+// import { SafeAreaView } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 
@@ -8,8 +9,8 @@ const AccountScreen = () => {
     const { signout } = useContext(AuthContext)
 
     return (
-        <>
-            <Text>Account Screen</Text>
+        <SafeAreaView forceInset={{ top: 'always' }}>
+            <Text style={{fontSize: 40}}>Account Screen</Text>
             <Spacer>
             <Button
                 style={styles.button} 
@@ -17,9 +18,10 @@ const AccountScreen = () => {
                 onPress={signout}
             />
             </Spacer>
-        </>
+        </SafeAreaView>
     ) 
 }
+//safeareaview is built in react component that renders our information inside the screen properly
 
 const styles = StyleSheet.create({
     button: {
