@@ -1,11 +1,13 @@
 import '../_mockLocation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { Text } from 'react-native-elements'
-import { requestPermissionsAsync, watchPositionAsync, Accuracy} from 'expo-location'
+import { requestPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location'
 import Map from '../components/Map'
+import { Context as LocationContext } from '../context/LocationContext'
 
 const TrackCreateScreen = () => {
+    const { addLocation } = useContext(LocationContext)
     const [err, setErr] = useState(null)
     
     useEffect(()=>{
@@ -19,7 +21,7 @@ const TrackCreateScreen = () => {
               accuracy: Accuracy.BestForNavigation,
               timeInterval: 1000,
               distanceInterval: 10
-          }, (location) => {})
+          }, location => addLocation(location))
           //this denotes the accuracy we want our points to be. we also set it to get an update every second and every 10 meters. the second arg is a function that denotes the users location
         
           if (!granted) {
