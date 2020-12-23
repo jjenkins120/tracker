@@ -4,7 +4,7 @@ import MapView, { PROVIDER_GOOGLE, Polyline, Circle } from 'react-native-maps'
 import { Context as LocationContext } from '../context/LocationContext'
 
 const Map = () => {
-    const { state: {currentLocation} } = useContext(LocationContext)
+    const { state: {currentLocation, locations} } = useContext(LocationContext)
 
     if (!currentLocation){
         return <ActivityIndicator size='large' style={{ marginTop: 200 }} />
@@ -37,6 +37,9 @@ const Map = () => {
                 fillColor='rgba(158, 158, 255, 0.3)'
             />
             {/* this draws a center around our current location - good for UI. Has to have specified radius and bordercolor(strokeColor) and fillcolor that is an RGBA value */}
+            <Polyline
+                coordinates={locations.map(location => location.coords)}
+            />
         </MapView>
     )
 }
