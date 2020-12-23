@@ -7,6 +7,7 @@ import { Text } from 'react-native-elements'
 import Map from '../components/Map'
 import { Context as LocationContext } from '../context/LocationContext'
 import TrackForm from '../components/TrackForm'
+import { FontAwesome } from '@expo/vector-icons'
 
 const TrackCreateScreen = ({ isFocused }) => {
     const { state: {recording}, addLocation } = useContext(LocationContext)
@@ -25,6 +26,11 @@ const TrackCreateScreen = ({ isFocused }) => {
     )
 }
 //we get access to isFocused(a boolean value) in the function args through withNavigationFocus. This will essentially give us a true or false value if the user is navigated on the this component when using the app (true) or when they are navigated away (false) 
+
+TrackCreateScreen.navigationOptions = {
+    title: 'Add Track', 
+    tabBarIcon: <FontAwesome name='plus' size={20}/>
+}
 
 const styles = StyleSheet.create({
 

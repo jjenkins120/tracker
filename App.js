@@ -13,6 +13,19 @@ import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
 import { Provider as AuthProvider } from './src/context/AuthContext'
 import { Provider as LocationProvider } from './src/context/LocationContext'
 import { Provider as TrackProvider } from './src/context/TrackContext'
+import { FontAwesome } from '@expo/vector-icons'
+
+const trackListFlow = createStackNavigator({
+  TrackList: TrackListScreen, 
+  TrackDetail: TrackDetailScreen
+})
+//this was extracted solely for styling purposes
+
+trackListFlow.navigationOptions = {
+  title: 'Tracks',
+  tabBarIcon: <FontAwesome name='th-list' size={20} />
+}
+
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -23,10 +36,7 @@ const switchNavigator = createSwitchNavigator({
   }),
   //this is a stack navigation that allows us to go back and forth between the sign up and the sign in screen 
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen, 
-      TrackDetail: TrackDetailScreen
-    }),
+    trackListFlow,
     //this helps us go back and forth between tracklist and track detail
     TrackCreate: TrackCreateScreen, 
     Account: AccountScreen,

@@ -18,5 +18,6 @@ instance.interceptors.request.use(
         return Promise.reject(err)
     }
 )
+//this code notifies our backend that our user has a token and allows them to make updates to the db and receive a promise
 
 export default instance
